@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Liquid Glass for Chrome",
+  "version": "0.4.0",
+  "description": "Lightweight Liquid Glass optical styling for modern websites, with YouTube-safe navigation.",
+  "permissions": ["storage"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "action": {"default_popup": "popup.html", "default_title": "Liquid Glass"},
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "css": ["styles.css"],
+    "js": ["content.js"],
+    "run_at": "document_idle"
+  }]
+}
