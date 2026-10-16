@@ -1,0 +1,1 @@
+# liquid-class-for-chrome
