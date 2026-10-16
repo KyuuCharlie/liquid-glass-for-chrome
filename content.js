@@ -37,12 +37,22 @@
       :root{--lg-radius:${r}px}
       html.lg-on{color-scheme:light dark}
       ${s.pageGlow?`html.lg-on body{background-image:
-        radial-gradient(ellipse at 12% 0%,rgba(100,170,255,${(.008+bloom*.035).toFixed(3)}),transparent 38%),
-        radial-gradient(ellipse at 92% 12%,rgba(190,140,255,${(.006+caust*.025).toFixed(3)}),transparent 34%) !important;
+        radial-gradient(ellipse at 12% 0%,rgba(100,170,255,${(.018+bloom*.075).toFixed(3)}),transparent 38%),
+        radial-gradient(ellipse at 92% 12%,rgba(190,140,255,${(.012+caust*.055).toFixed(3)}),transparent 34%) !important;
         background-attachment:fixed !important}`:''}
-      ${s.surfaces?`html.lg-on :is([role="dialog"],[role="alertdialog"],[role="menu"],[role="listbox"],
+      ${s.surfaces?`
+      /* Common floating layers and cards: keep the treatment targeted, not document-wide. */
+      html.lg-on :is([role="dialog"],[role="alertdialog"],[role="menu"],[role="listbox"],
         [aria-modal="true"],.modal,.dialog,.popover,.dropdown-menu,.context-menu,
-        .command-palette,[data-radix-popper-content-wrapper]){${overlay}}`:''}
+        .command-palette,[data-radix-popper-content-wrapper],[role="tooltip"],
+        [class~="card"],[class*="card-"],[class*="-card"],article,
+        .MuiPaper-root,.ant-card,.chakra-card){${overlay}}
+      html.lg-on :is(header,nav,aside,[role="navigation"],[role="banner"]):not(:has([data-liquid-glass="off"])){
+        background-color:rgba(220,232,250,${(.012+opacity*.10).toFixed(3)}) !important;
+        border-color:rgba(255,255,255,${(.04+edge*.16).toFixed(3)}) !important;
+        box-shadow:inset 0 1px rgba(255,255,255,${(.025+edge*.12).toFixed(3)}),
+          0 4px 24px rgba(35,65,110,${(.006+bloom*.035).toFixed(3)}) !important;
+      }`:''}
       ${s.controls?`html.lg-on :is(button,[role="button"],[role="tab"],[role="switch"],summary){
         border-radius:max(7px,calc(var(--lg-radius)*.52)) !important;
         transition:filter .15s ease,box-shadow .15s ease !important;
@@ -54,7 +64,7 @@
       }`:''}
       ${s.lighting?`html.lg-on :is([role="dialog"],[role="menu"],.modal,.popover,.dropdown-menu,.command-palette)::before{
         content:"";pointer-events:none;position:absolute;inset:0;border-radius:inherit;
-        background:linear-gradient(118deg,rgba(255,255,255,${(.02+edge*.15).toFixed(3)}),transparent 44%),
+        background:linear-gradient(118deg,rgba(255,255,255,${(.025+edge*.20).toFixed(3)}),transparent 44%),
           radial-gradient(100% 35% at 50% 0%,rgba(255,255,255,${(.015+edge*.15).toFixed(3)}),transparent 75%);
       }
       html.lg-on :is([role="dialog"],[role="menu"],.modal,.popover,.dropdown-menu,.command-palette)::after{
