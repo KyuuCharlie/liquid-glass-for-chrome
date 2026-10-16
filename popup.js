@@ -1,0 +1,9 @@
+const D={enabled:true,preset:"optical",blur:18,opacity:22,saturation:155,radius:18,edge:65,refraction:45,caustics:28,bloom:25,lighting:true,surfaces:true,controls:true,images:false,pageGlow:true,exclude:""};
+const P={subtle:{blur:10,opacity:34,saturation:125,radius:14,edge:30,refraction:15,caustics:8,bloom:10},optical:{blur:18,opacity:22,saturation:155,radius:18,edge:65,refraction:45,caustics:28,bloom:25},prismatic:{blur:26,opacity:16,saturation:195,radius:24,edge:90,refraction:78,caustics:62,bloom:50}};
+const $=id=>document.getElementById(id), ranges=["blur","opacity","saturation","radius","edge","refraction","caustics","bloom"], checks=["enabled","lighting","pageGlow","surfaces","controls","images"];
+let s={...D};
+function render(v){s={...D,...v};checks.forEach(id=>$(id).checked=!!s[id]);ranges.forEach(id=>{$(id).value=s[id];$(id+"V").textContent=s[id]+(id==="blur"||id==="radius"?" px":id==="saturation"||id==="opacity"||id==="edge"||id==="refraction"||id==="caustics"||id==="bloom"?"%":"")});$("exclude").value=s.exclude||"";document.querySelectorAll("[data-p]").forEach(b=>b.classList.toggle("active",b.dataset.p===s.preset))}
+function read(){const v={...s};checks.forEach(id=>v[id]=$(id).checked);ranges.forEach(id=>v[id]=+$(id).value);v.exclude=$("exclude").value;return v}
+function save(){s=read();chrome.storage.sync.set(s);render(s);$("status").textContent="已保存 · 实时应用"}
+chrome.storage.sync.get(D,render);[...checks,...ranges,"exclude"].forEach(id=>$(id).addEventListener("input",save));
+document.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{const v={...read(),...P[b.dataset.p],preset:b.dataset.p};render(v);save()});$("reset").onclick=()=>{render(D);save()};
