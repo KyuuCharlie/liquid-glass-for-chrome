@@ -1,1 +1,1 @@
-# liquid-class-for-chrome
+# liquid-glass-for-chrome
