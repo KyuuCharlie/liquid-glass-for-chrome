@@ -36,14 +36,14 @@
     return `
       :root{--lg-radius:${r}px}
       html.lg-on{color-scheme:light dark}
-      ${s.pageGlow?\`html.lg-on body{background-image:
+      ${s.pageGlow?`html.lg-on body{background-image:
         radial-gradient(ellipse at 12% 0%,rgba(100,170,255,${(.008+bloom*.035).toFixed(3)}),transparent 38%),
         radial-gradient(ellipse at 92% 12%,rgba(190,140,255,${(.006+caust*.025).toFixed(3)}),transparent 34%) !important;
-        background-attachment:fixed !important}\`:''}
-      ${s.surfaces?\`html.lg-on :is([role="dialog"],[role="alertdialog"],[role="menu"],[role="listbox"],
+        background-attachment:fixed !important}`:''}
+      ${s.surfaces?`html.lg-on :is([role="dialog"],[role="alertdialog"],[role="menu"],[role="listbox"],
         [aria-modal="true"],.modal,.dialog,.popover,.dropdown-menu,.context-menu,
-        .command-palette,[data-radix-popper-content-wrapper]){${overlay}}\`:''}
-      ${s.controls?\`html.lg-on :is(button,[role="button"],[role="tab"],[role="switch"],summary){
+        .command-palette,[data-radix-popper-content-wrapper]){${overlay}}`:''}
+      ${s.controls?`html.lg-on :is(button,[role="button"],[role="tab"],[role="switch"],summary){
         border-radius:max(7px,calc(var(--lg-radius)*.52)) !important;
         transition:filter .15s ease,box-shadow .15s ease !important;
       }
@@ -51,8 +51,8 @@
         filter:brightness(1.04) saturate(1.06) !important;
         box-shadow:0 3px 14px rgba(75,125,200,${(.008+bloom*.045).toFixed(3)}),
           inset 0 1px rgba(255,255,255,${(.04+edge*.18).toFixed(3)}) !important;
-      }\`:''}
-      ${s.lighting?\`html.lg-on :is([role="dialog"],[role="menu"],.modal,.popover,.dropdown-menu,.command-palette)::before{
+      }`:''}
+      ${s.lighting?`html.lg-on :is([role="dialog"],[role="menu"],.modal,.popover,.dropdown-menu,.command-palette)::before{
         content:"";pointer-events:none;position:absolute;inset:0;border-radius:inherit;
         background:linear-gradient(118deg,rgba(255,255,255,${(.02+edge*.15).toFixed(3)}),transparent 44%),
           radial-gradient(100% 35% at 50% 0%,rgba(255,255,255,${(.015+edge*.15).toFixed(3)}),transparent 75%);
@@ -63,12 +63,12 @@
           rgba(255,255,255,.012) 35%,rgba(125,190,255,${(.01+caust*.2).toFixed(3)}),rgba(255,255,255,.035));
         -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
         -webkit-mask-composite:xor;mask-composite:exclude;
-      }\`:''}
+      }`:''}
       ${s.images?'html.lg-on :is(img,video,canvas,iframe){border-radius:min(12px,var(--lg-radius)) !important}':''}
       html.lg-on [data-liquid-glass="off"],html.lg-on [data-liquid-glass="off"] *{
         backdrop-filter:none !important;-webkit-backdrop-filter:none !important;box-shadow:initial !important}
       html.lg-on :focus-visible{outline:2px solid Highlight !important;outline-offset:2px !important}
-      ${yt?\`
+      ${yt?`
       /* YouTube navigation is structural: never blur, clip, transform or paint over it. */
       html.lg-on #guide,html.lg-on #guide *,
       html.lg-on ytd-guide-renderer,html.lg-on ytd-guide-renderer *,
@@ -80,7 +80,7 @@
       html.lg-on ytd-guide-renderer::before,html.lg-on ytd-guide-renderer::after,
       html.lg-on ytd-mini-guide-renderer::before,html.lg-on ytd-mini-guide-renderer::after{
         content:none !important;display:none !important;
-      }\`:''}
+      }`:''}
       @media(prefers-reduced-motion:reduce){html.lg-on *{transition-duration:.01ms !important}}
     `;
   }
