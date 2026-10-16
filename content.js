@@ -46,7 +46,7 @@
         [aria-modal="true"],.modal,.dialog,.popover,.dropdown-menu,.context-menu,
         .command-palette,[data-radix-popper-content-wrapper],[role="tooltip"],
         [class~="card"],[class*="card-"],[class*="-card"],article,
-        .MuiPaper-root,.ant-card,.chakra-card,.둥근-카드){${overlay}}
+        .MuiPaper-root,.ant-card,.chakra-card){${overlay}}
       html.lg-on :is(header,nav,aside,[role="navigation"],[role="banner"]):not(:has([data-liquid-glass="off"])){
         background-color:rgba(220,232,250,${(.012+opacity*.10).toFixed(3)}) !important;
         border-color:rgba(255,255,255,${(.04+edge*.16).toFixed(3)}) !important;
