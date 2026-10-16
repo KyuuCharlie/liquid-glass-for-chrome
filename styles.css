@@ -1,0 +1,3 @@
+/* Keep the static stylesheet cheap. Optical blur lives only on explicit overlay selectors in content.js. */
+html.lg-on ::selection{background:rgba(130,180,255,.28)}
+html.lg-on :is(button,[role="button"],input,select,textarea){-webkit-tap-highlight-color:transparent}
