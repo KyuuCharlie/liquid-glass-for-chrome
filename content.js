@@ -104,4 +104,37 @@
   }
   chrome.storage.sync.get(DEFAULTS,apply);
   chrome.storage.onChanged.addListener((_,area)=>{if(area==="sync")chrome.storage.sync.get(DEFAULTS,apply)});
+
+  // Hidden seasonal surprise: type "spooky" outside editable fields.
+  (() => {
+    let typed = "";
+    let toastTimer = 0;
+    const show = () => {
+      document.getElementById("lg-halloween-toast")?.remove();
+      const toast = document.createElement("div");
+      toast.id = "lg-halloween-toast";
+      toast.setAttribute("role", "status");
+      toast.textContent = "👻 A little liquid magic says: Happy Halloween!";
+      Object.assign(toast.style, {
+        position: "fixed", right: "20px", bottom: "20px", zIndex: "2147483647",
+        maxWidth: "min(360px, calc(100vw - 40px))", padding: "14px 18px",
+        border: "1px solid rgba(255,255,255,.35)", borderRadius: "16px",
+        color: "#fff", background: "rgba(35,25,55,.82)",
+        backdropFilter: "blur(18px) saturate(150%)", WebkitBackdropFilter: "blur(18px) saturate(150%)",
+        boxShadow: "0 12px 40px rgba(0,0,0,.28)", font: "13px system-ui,sans-serif",
+        pointerEvents: "none"
+      });
+      (document.body || document.documentElement).appendChild(toast);
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.remove(), 4200);
+    };
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") { document.getElementById("lg-halloween-toast")?.remove(); return; }
+      if (event.key.length !== 1 || event.metaKey || event.ctrlKey || event.altKey) return;
+      const target = event.target;
+      if (target instanceof HTMLElement && target.closest("input,textarea,select,[contenteditable=true]")) return;
+      typed = (typed + event.key.toLowerCase()).slice(-6);
+      if (typed === "spooky") { show(); typed = ""; }
+    }, { passive: true });
+  })();
 })();
