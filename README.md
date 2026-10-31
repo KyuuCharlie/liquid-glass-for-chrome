@@ -21,3 +21,7 @@ The popup provides Subtle, Optical and Prismatic presets plus blur, transparency
 ### Optical model
 
 CSS cannot provide true arbitrary-page refraction or per-pixel chromatic aberration. The optical effect is intentionally simulated with compositing layers and backdrop filtering.
+
+## Halloween easter egg 🎃
+
+On any enabled page, type `spooky` (outside text fields) to reveal a small ghostly toast. Press Escape or wait a few seconds to dismiss it. It does not collect input or change page content.
